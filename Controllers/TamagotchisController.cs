@@ -26,5 +26,18 @@ namespace LandOfTamagotchiAPI.Controllers
 
             return Ok(allTheTamagotchis);
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Tamagotchi> GetByID(int id)
+        {
+            var tamagotchi = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+
+            if (tamagotchi == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tamagotchi);
+        }
     }
 }
