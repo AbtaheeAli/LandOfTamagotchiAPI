@@ -7,7 +7,7 @@ namespace LandOfTamagotchiAPI.Models
 {
     public partial class DatabaseContext : DbContext
     {
-        // Change this if you want to have a different database name in development
+        public DbSet<Tamagotchi> Tamagotchis { get; set; }
         private static string DEVELOPMENT_DATABASE_NAME = "LandOfTamagotchiAPIDatabase";
 
         // Change this to true if you want to have logging of SQL statements in development
