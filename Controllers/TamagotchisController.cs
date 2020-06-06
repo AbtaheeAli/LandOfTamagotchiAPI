@@ -78,5 +78,24 @@ namespace LandOfTamagotchiAPI.Controllers
 
             return CreatedAtAction(null, null, tamagotchiToCreate);
         }
+
+        [HttpPost("{id}/playtimes")]
+        public ActionResult<Tamagotchi> UpdatePlayTime(int id, string playtime)
+        {
+            var tamagotchiThatIsLiveInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+
+            if (tamagotchiThatIsLiveInTheDatabase == null)
+            {
+                return NotFound();
+            }
+
+            tamagotchiThatIsLiveInTheDatabase.HungerLevel += 3;
+            tamagotchiThatIsLiveInTheDatabase.HappinessLevel += 5;
+
+            _context.Entry(tamagotchiThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return Ok(tamagotchiThatIsLiveInTheDatabase);
+        }
     }
 }
