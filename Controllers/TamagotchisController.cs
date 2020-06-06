@@ -97,5 +97,64 @@ namespace LandOfTamagotchiAPI.Controllers
 
             return Ok(tamagotchiThatIsLiveInTheDatabase);
         }
+
+        [HttpPost("{id}/feedings")]
+        public ActionResult<Tamagotchi> UpdateFeeding(int id, string feeding)
+        {
+            var tamagotchiThatIsLiveInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+
+            if (tamagotchiThatIsLiveInTheDatabase == null)
+            {
+                return NotFound();
+            }
+
+            if (tamagotchiThatIsLiveInTheDatabase.HungerLevel < 5)
+            {
+                tamagotchiThatIsLiveInTheDatabase.HungerLevel = 0;
+            }
+            else
+            {
+                tamagotchiThatIsLiveInTheDatabase.HungerLevel -= 5;
+            }
+
+            if (tamagotchiThatIsLiveInTheDatabase.HappinessLevel < 3)
+            {
+                tamagotchiThatIsLiveInTheDatabase.HappinessLevel = 0;
+            }
+            else
+            {
+                tamagotchiThatIsLiveInTheDatabase.HappinessLevel -= 3;
+            }
+
+            _context.Entry(tamagotchiThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return Ok(tamagotchiThatIsLiveInTheDatabase);
+        }
+
+        [HttpPost("{id}/scoldings")]
+        public ActionResult<Tamagotchi> UpdateScolding(int id, string feeding)
+        {
+            var tamagotchiThatIsLiveInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+
+            if (tamagotchiThatIsLiveInTheDatabase == null)
+            {
+                return NotFound();
+            }
+
+            if (tamagotchiThatIsLiveInTheDatabase.HappinessLevel < 5)
+            {
+                tamagotchiThatIsLiveInTheDatabase.HappinessLevel = 0;
+            }
+            else
+            {
+                tamagotchiThatIsLiveInTheDatabase.HappinessLevel -= 5;
+            }
+
+            _context.Entry(tamagotchiThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return Ok(tamagotchiThatIsLiveInTheDatabase);
+        }
     }
 }
