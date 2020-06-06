@@ -67,7 +67,7 @@ namespace LandOfTamagotchiAPI.Controllers
             {
                 var errorMessage = new
                 {
-                    message = $"You requested the tamagotchi's birthday to be at{tamagotchiToCreate.Birthday}, but each tamagotchi is given a birthday of the day it was created. Please try again."
+                    message = $"You requested the tamagotchi's birthday to be at {tamagotchiToCreate.Birthday}, but each tamagotchi is given a birthday of the day it was created. Please try again."
                 };
 
                 return UnprocessableEntity(errorMessage);
@@ -82,79 +82,79 @@ namespace LandOfTamagotchiAPI.Controllers
         [HttpPost("{id}/playtimes")]
         public ActionResult<Tamagotchi> UpdatePlayTime(int id, string playtime)
         {
-            var tamagotchiThatIsLiveInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+            var tamagotchiThatLivesInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
 
-            if (tamagotchiThatIsLiveInTheDatabase == null)
+            if (tamagotchiThatLivesInTheDatabase == null)
             {
                 return NotFound();
             }
 
-            tamagotchiThatIsLiveInTheDatabase.HungerLevel += 3;
-            tamagotchiThatIsLiveInTheDatabase.HappinessLevel += 5;
+            tamagotchiThatLivesInTheDatabase.HungerLevel += 3;
+            tamagotchiThatLivesInTheDatabase.HappinessLevel += 5;
 
-            _context.Entry(tamagotchiThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.Entry(tamagotchiThatLivesInTheDatabase).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return Ok(tamagotchiThatIsLiveInTheDatabase);
+            return Ok(tamagotchiThatLivesInTheDatabase);
         }
 
         [HttpPost("{id}/feedings")]
         public ActionResult<Tamagotchi> UpdateFeeding(int id, string feeding)
         {
-            var tamagotchiThatIsLiveInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+            var tamagotchiThatLivesInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
 
-            if (tamagotchiThatIsLiveInTheDatabase == null)
+            if (tamagotchiThatLivesInTheDatabase == null)
             {
                 return NotFound();
             }
 
-            if (tamagotchiThatIsLiveInTheDatabase.HungerLevel < 5)
+            if (tamagotchiThatLivesInTheDatabase.HungerLevel < 5)
             {
-                tamagotchiThatIsLiveInTheDatabase.HungerLevel = 0;
+                tamagotchiThatLivesInTheDatabase.HungerLevel = 0;
             }
             else
             {
-                tamagotchiThatIsLiveInTheDatabase.HungerLevel -= 5;
+                tamagotchiThatLivesInTheDatabase.HungerLevel -= 5;
             }
 
-            if (tamagotchiThatIsLiveInTheDatabase.HappinessLevel < 3)
+            if (tamagotchiThatLivesInTheDatabase.HappinessLevel < 3)
             {
-                tamagotchiThatIsLiveInTheDatabase.HappinessLevel = 0;
+                tamagotchiThatLivesInTheDatabase.HappinessLevel = 0;
             }
             else
             {
-                tamagotchiThatIsLiveInTheDatabase.HappinessLevel -= 3;
+                tamagotchiThatLivesInTheDatabase.HappinessLevel -= 3;
             }
 
-            _context.Entry(tamagotchiThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.Entry(tamagotchiThatLivesInTheDatabase).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return Ok(tamagotchiThatIsLiveInTheDatabase);
+            return Ok(tamagotchiThatLivesInTheDatabase);
         }
 
         [HttpPost("{id}/scoldings")]
         public ActionResult<Tamagotchi> UpdateScolding(int id, string feeding)
         {
-            var tamagotchiThatIsLiveInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+            var tamagotchiThatLivesInTheDatabase = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
 
-            if (tamagotchiThatIsLiveInTheDatabase == null)
+            if (tamagotchiThatLivesInTheDatabase == null)
             {
                 return NotFound();
             }
 
-            if (tamagotchiThatIsLiveInTheDatabase.HappinessLevel < 5)
+            if (tamagotchiThatLivesInTheDatabase.HappinessLevel < 5)
             {
-                tamagotchiThatIsLiveInTheDatabase.HappinessLevel = 0;
+                tamagotchiThatLivesInTheDatabase.HappinessLevel = 0;
             }
             else
             {
-                tamagotchiThatIsLiveInTheDatabase.HappinessLevel -= 5;
+                tamagotchiThatLivesInTheDatabase.HappinessLevel -= 5;
             }
 
-            _context.Entry(tamagotchiThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.Entry(tamagotchiThatLivesInTheDatabase).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return Ok(tamagotchiThatIsLiveInTheDatabase);
+            return Ok(tamagotchiThatLivesInTheDatabase);
         }
 
         [HttpDelete("{id}")]
