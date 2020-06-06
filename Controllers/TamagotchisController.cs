@@ -156,5 +156,21 @@ namespace LandOfTamagotchiAPI.Controllers
 
             return Ok(tamagotchiThatIsLiveInTheDatabase);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Tamagotchi> Delete(int id)
+        {
+            var foundTamagotchi = _context.Tamagotchis.FirstOrDefault(tamagotchi => tamagotchi.Id == id);
+
+            if (foundTamagotchi == null)
+            {
+                return NotFound();
+            }
+
+            _context.Tamagotchis.Remove(foundTamagotchi);
+            _context.SaveChanges();
+
+            return Ok(foundTamagotchi);
+        }
     }
 }
