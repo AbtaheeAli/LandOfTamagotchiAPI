@@ -2,6 +2,8 @@
 
 ![Kapture 2020-07-03 at 8 52 47](https://user-images.githubusercontent.com/62678918/86471114-bb6c9700-bd0a-11ea-8c84-ecd7d114ae30.gif)
 
+Languages and technologies used: C#, API, ASP.NET, & Entity Framework Core
+
 I created an API that allows a user to create and care for a virtual pet, also known as a Tamagotchi. This application not only uses API endpoints and Entity Framework Core, but is able to do the basic functionality of a web API: create, read, update and delete.
 
 I used a POCO called Tamagotchi with the following columns:
